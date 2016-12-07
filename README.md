@@ -62,13 +62,14 @@ Now go to OBIEE and signin - you should see the rm_http.log file being written t
 
 ### Configure and Run Log Parser ###
 
-From https://www.elastic.co/downloads/past-releases/logstash-2-4-1 download and install the last release of Logstash 2.4 (EUT has not been tested with Logstash 5.0)
+[Download](https://www.elastic.co/downloads/past-releases/logstash-2-4-1) and install the last release of Logstash 2.4 (this has not been tested with Logstash 5.0)
 
     wget https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.4.1.noarch.rpm
     sudo rpm -i logstash-2.4.1.noarch.rpm
 
 Clone the github repo:
 
+    cd ~
     git clone https://github.com/RittmanMead/obi-enhanced-usage-tracking.git
 
 Edit the `logstash-obi-clickstream.conf` config file, to set the path :
@@ -135,7 +136,7 @@ Head over to the `OBI_CLICKDATA` table and you'll see the scraped data:
 
 ![eut104.png](images/eut104.png)
 
-Some software may barf on the timestamp column; use this to query it instead:
+Using the `TIMESTAMP WITH TIMEZONE` datatype in the `OBI_CLICKDATA` table causes a problem for some software (including the latest version of DV). To get around this, you can create a view with the timestamp simply cast to a standard `TIMESTAMP` datatype. You may need to modify this to cope with the actual timezone that you're working in:
 
 ```sql
 create view vw_obi_clickdata as
@@ -164,4 +165,4 @@ from obi_clickdata;
 
 Please raise any issues on the [github issue tracker](https://github.com/RittmanMead/obi-enhanced-usage-tracking/issues). This is open source, so bear in mind that it's no-one's "job" to maintain the code - it's open to the community to use, benefit from, and maintain.
 
-If you'd like specific help with an implementation, Rittman Mead would be delighted to assist - please do [get in touch](https://www.rittmanmead.com/contact/) to discuss our rates :)
+If you'd like specific help with an implementation, Rittman Mead would be delighted to assist - please do [get in touch](https://www.rittmanmead.com/contact/) to discuss our rates.
