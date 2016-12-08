@@ -9,6 +9,22 @@ OBIEE provides [Usage Tracking](https://docs.oracle.com/middleware/12212/biee/BI
 
 What Usage Tracking *doesn't* track is interactions between the end user and the Presentation Services component. Presentation Services sits between the end user and the BI Server from where the actual queries get executed. This means that until a user *executes* an analysis, there's no record of their actions in Usage Tracking. There is this audit data available, but you have to manually enable and collect it, which can be tricky. This is where Enhanced Usage Tracking comes in. It enables the collection and parsing of every click a user makes in OBIEE. For an overview of the potential of this data, see [the article here](https://www.rittmanmead.com/blog/2015/12/driving-obiee-user-engagement-with-enhanced-usage-tracking-for-obiee/) and [here](https://www.rittmanmead.com/blog/2014/11/auditing-obiee-presentation-catalog-activity-with-custom-log-filters/).
 
+Highlights of the data include:
+
+* Which web browsers do people use? Who is accessing OBIEE with a mobile device?
+
+ ![](https://www.rittmanmead.com/blog/content/images/2016/08/82ceut06.png)
+
+ ![](https://www.rittmanmead.com/blog/content/images/2016/08/77ceut07.png)
+
+* Who deleted a catalog object? Who moved it?
+
+ ![](https://www.rittmanmead.com/blog/content/images/2016/08/72ceut11.png)
+
+* What dashboards get exported to Excel most frequently, and by whom?
+
+ ![](https://www.rittmanmead.com/blog/content/images/2016/08/80ceut09.png)
+
 ## How to use Enhanced Usage Tracking ##
 
 ### Configure Click Event Logging for Presentation Services ###
@@ -160,6 +176,13 @@ select SESSIONID
     ,ECID
 from obi_clickdata;
 ```
+
+With this view created you can easily chuck the data into DV and explore it some more:
+
+![eut106.png](/images/eut106.png)
+
+![eut107.png](/images/eut107.png)
+
 
 ### Problems? ###
 
